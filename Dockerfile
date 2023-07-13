@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the React app for production
-RUN npm run build -- --prod
+RUN npm run build
 
 # Set the environment variable to serve the app
 ENV NODE_ENV=production
