@@ -1,0 +1,12 @@
+.navbar {
+  background-color: rgb(29, 29, 29);
+  padding-right: 20px;
+
+}
+
+.navbar a.navbar-brand,
+.navbar a.nav-link {
+  color: white;
+  font-family: Raleway, sans-serif;
+  font-size: 16px;
+}
