@@ -1,6 +1,10 @@
 .navbar {
   background-color: rgb(29, 29, 29);
   padding-right: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 
 }
 
@@ -9,4 +13,7 @@
   color: white;
   font-family: Raleway, sans-serif;
   font-size: 16px;
+}
+body {
+  padding-top: 70px; /* Adjust this value to provide enough space for the fixed navbar */
 }
