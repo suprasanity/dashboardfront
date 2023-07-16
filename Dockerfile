@@ -1,25 +1,10 @@
 # Use an official Node.js runtime as the base image
-FROM node:19.5.0-alpine AS builder
-# Set the working directory
-WORKDIR /usr/local/app
+FROM node:19.5.0-alpine
 
-# Add the source code to app
-COPY ./ /usr/local/app/
-
-# Install all the dependencies
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-
-# Generate the build of the application
+COPY . .
 RUN npm run build
-
-
-# Stage 2: Serve app with nginx server
-
-# Use official nginx image as the base image
-FROM nginx:latest
-
-# Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/sample-angular-app /usr/share/nginx/html
-
-# Expose port 80
 EXPOSE 80
+CMD ["npm", "start"]
