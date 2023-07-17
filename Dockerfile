@@ -24,7 +24,7 @@ FROM node:19-slim as production-stage
 WORKDIR /app
 
 # Copy the built app from the build-stage
-COPY --from=build-stage /app/dist ./dist
+COPY --from=build-stage /app/dist/* ./dist
 
 # Install a lightweight http server
 RUN npm install -g http-server
