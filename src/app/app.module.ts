@@ -11,12 +11,14 @@ import {FlatpickrModule} from "angularx-flatpickr";
 import {DateAdapter} from "@angular/material/core";
 import {CalendarModule} from "angular-calendar";
 import {adapterFactory} from "angular-calendar/date-adapters/moment";
+import { AboutmeComponent } from './aboutme/aboutme.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LandingComponent,
+    AboutmeComponent,
 
   ],
   imports: [
