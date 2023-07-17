@@ -21,3 +21,11 @@ body {
   overflow: hidden;
 }
 
+@keyframes zoomOut {
+  0% {
+    transform: scale(1.5); /* Zoom maximal */
+  }
+  100% {
+    transform: scale(1); /* Taille initiale de l'image */
+  }
+}
