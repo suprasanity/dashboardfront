@@ -17,3 +17,7 @@
     transform: scale(1.5); /* Zoom maximal */
   }
 }
+body {
+  overflow: hidden;
+}
+
