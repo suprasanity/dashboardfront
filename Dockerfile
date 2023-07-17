@@ -17,20 +17,16 @@ COPY . .
 RUN npm run build --prod
 
 
-# Utiliser une image Node 19 légère pour servir l'application
-FROM node:19-slim as production-stage
 
-# Définir le répertoire de travail sur /app
-WORKDIR /app
+# Stage 2: Serve the Angular app using NGINX
+FROM nginx:1.21.1
+COPY --from=build-stage /app/dist/* /usr/share/nginx/html
 
-# Copier l'application construite à partir de build-stage
-COPY --from=build-stage /app/dist .
+# Copy the NGINX configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Installer un serveur HTTP léger
-RUN npm install -g http-server
-
-# Exposer le port 80 pour l'application Angular
+# Expose the default NGINX port
 EXPOSE 80
 
-# Start the http-server to serve the app
-CMD ["http-server", "./", "-p", "80", "-c-1"]
+# Start NGINX server
+CMD ["nginx", "-g", "daemon off;"]
