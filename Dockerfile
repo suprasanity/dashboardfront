@@ -8,4 +8,5 @@ RUN npm install
 COPY . .
 RUN npm run build
 EXPOSE 80
-CMD ["npm", "start"]
+USER root
+CMD ["/bin/bash", "-c", "echo 'chovy.freeboxos.fr' > /etc/hostname && service hostname restart && npm start"]
