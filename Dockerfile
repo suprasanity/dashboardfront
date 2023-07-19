@@ -1,11 +1,14 @@
-# Utiliser Node 19 comme image de base
-FROM node:19 as build-stage
-
-# Définir le répertoire de travail sur /app
+# Stage 1: Build the Angular app
+FROM node:19 AS build
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
-RUN npm run build
-EXPOSE 80
-CMD ["npm", "start"]
+RUN npm run build --prod
+
+# Stage 2: Create a production-ready image with Apache
+FROM httpd:2.4
+COPY --from=build /app/dist /usr/local/apache2/htdocs/
+
+# Ajouter la configuration pour les routes Angular en mode HTML5
+COPY apache-config.conf /usr/local/apache2/conf/httpd.conf
