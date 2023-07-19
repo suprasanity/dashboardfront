@@ -20,3 +20,4 @@ RUN echo 'ProxyPassReverse /api/ http://backend:3000/' >> /usr/local/apache2/con
 # Update Apache default site configuration
 COPY ./apache-default.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
 RUN echo 'Include conf/extra/httpd-vhosts.conf' >> /usr/local/apache2/conf/httpd.conf
+RUN echo '127.0.0.1 chovy.freeboxos.fr' >> /etc/hosts
