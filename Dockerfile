@@ -8,7 +8,7 @@ RUN npm run build --prod
 
 # Stage 2: Create a production-ready image with Apache
 FROM httpd:2.4
-COPY --from=build /app/dist /usr/local/apache2/htdocs/
+COPY --from=build /app/dist/ /usr/local/apache2/htdocs/
 
 # Enable Apache rewrite module and update configuration
 RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
@@ -20,5 +20,3 @@ RUN echo 'ProxyPassReverse /api/ http://backend:3000/' >> /usr/local/apache2/con
 # Update Apache default site configuration
 COPY apache-default.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
 RUN echo 'Include conf/extra/httpd-vhosts.conf' >> /usr/local/apache2/conf/httpd.conf
-
-# Update hosts file to map the desired domain
