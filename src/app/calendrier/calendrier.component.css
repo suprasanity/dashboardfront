@@ -1,0 +1,59 @@
+/* Custom styles for the pseudo calendar */
+
+table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+th:first-child,
+td:first-child {
+  background-color: #e0e0e0;
+}
+
+/* Set the width of the first column to reserve space for the time labels */
+th:first-child,
+td:first-child {
+  width: 80px;
+}
+
+/* Set the height of the first row to reserve space for the day labels */
+tr:first-child th {
+  height: 50px;
+}
+
+/* Set a fixed height for the rows */
+tr:not(:first-child) {
+  height: 40px;
+}
+
+/* Add some hover effect to the table cells */
+td {
+  cursor: pointer;
+}
+
+td:hover {
+  background-color: #f2f2f2;
+}
+
+/* Add a scrollbar for the table body */
+tbody {
+  overflow-y: auto;
+}
+
+/* Optional: Add some padding around the table */
+table {
+  margin: 20px 0;
+}

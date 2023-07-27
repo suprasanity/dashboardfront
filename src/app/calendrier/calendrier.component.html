@@ -1,0 +1,20 @@
+<table>
+  <thead>
+  <tr>
+    <th></th>
+    <ng-container *ngFor="let jour of joursSemaine">
+      <th>{{ jour }}</th>
+    </ng-container>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let heure of heures">
+    <tr>
+      <th>{{ heure }}</th>
+      <td *ngFor="let jour of joursSemaine"> <!-- Créez une cellule pour chaque heure et jour -->
+        <!-- Ici, vous pouvez ajouter d'autres éléments ou des événements associés à chaque cellule -->
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
