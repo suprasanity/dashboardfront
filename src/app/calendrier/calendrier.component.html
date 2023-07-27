@@ -1,9 +1,9 @@
 <table>
   <thead>
   <tr>
-    <th></th>
+    <th> {{ getCurrentMonthName() }} {{ getCurrentYear() }}</th>
     <ng-container *ngFor="let jour of joursSemaine">
-      <th>{{ jour }}</th>
+      <th>{{ jour }} {{getDayNumber(jour)}}</th>
     </ng-container>
   </tr>
   </thead>
@@ -11,10 +11,20 @@
   <ng-container *ngFor="let heure of heures">
     <tr>
       <th>{{ heure }}</th>
-      <td *ngFor="let jour of joursSemaine"> <!-- Créez une cellule pour chaque heure et jour -->
+      <td *ngFor="let jour of joursSemaine">
         <!-- Ici, vous pouvez ajouter d'autres éléments ou des événements associés à chaque cellule -->
+        <!-- Replace this comment with the code to display events or content for each cell -->
+        <div *ngFor="let event of getEventsForDay(jour, heure)">
+          {{ event }}
+        </div>
       </td>
     </tr>
   </ng-container>
   </tbody>
 </table>
+<div class="btn-group">
+  <button class="btn btn-primary" (click)="previousMonth()">Previous Month</button>
+  <button class="btn btn-primary" (click)="previousWeek()">Previous Week</button>
+  <button class="btn btn-primary" (click)="nextWeek()">Next Week</button>
+  <button class="btn btn-primary" (click)="nextMonth()">Next Month</button>
+</div>
