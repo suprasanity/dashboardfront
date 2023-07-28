@@ -22,7 +22,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: 'http://chovy.freeboxos.fr:9989/auth',
         realm: 'Yann',
-        clientId: 'dashboarp'
+        clientId: 'dashboard'
       },
       initOptions: {
         onLoad: 'check-sso',
