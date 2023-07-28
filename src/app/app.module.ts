@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,25 @@ import {CalendarModule} from "angular-calendar";
 import {adapterFactory} from "angular-calendar/date-adapters/moment";
 import { AboutmeComponent } from './aboutme/aboutme.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://chovy.freeboxos.fr:9989/auth',
+        realm: 'Yann',
+        clientId: 'dashboard'
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      }
+    });
+}
+
 
 @NgModule({
   declarations: [
@@ -24,6 +43,7 @@ import { CalendrierComponent } from './calendrier/calendrier.component';
 
   ],
   imports: [
+    KeycloakAngularModule,
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
@@ -46,7 +66,12 @@ import { CalendrierComponent } from './calendrier/calendrier.component';
     NavbarComponent,
     LandingComponent,
   ],
-  providers: [],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService]
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
